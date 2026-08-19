@@ -1,0 +1,9 @@
+{
+  "name": "Genesis Project",
+  "short_name": "Genesis",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c130f",
+  "theme_color": "#101b14",
+  "description": "A persistent artificial-history god simulation."
+}
