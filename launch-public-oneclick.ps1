@@ -9,13 +9,33 @@ $port = 7860
 $ollamaUrl = "http://127.0.0.1:11434"
 $ollamaModel = "qwen2.5:7b"
 
-if (-not (Test-Path (Join-Path $repoDir ".venv\Scripts\python.exe"))) {
-    Write-Host "Python venv not found. Run:"
-    Write-Host "  python -m venv .venv"
-    Write-Host "  .venv\Scripts\activate"
-    Write-Host "  pip install -r requirements.txt"
-    Read-Host "Press Enter to exit"
-    exit 1
+if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
+  Write-Host "Python is not on PATH. Install Python 3.10+ and retry."
+  Read-Host "Press Enter to exit"
+  exit 1
+}
+
+$venvPython = Join-Path $repoDir ".venv\Scripts\python.exe"
+$venvPip = Join-Path $repoDir ".venv\Scripts\pip.exe"
+
+if (-not (Test-Path $venvPython)) {
+  Write-Host "No virtual environment found. Creating one..."
+  python -m venv (Join-Path $repoDir ".venv")
+}
+
+if (-not (Test-Path $venvPip)) {
+  Write-Host "Virtual environment is incomplete. Recreating..."
+  Remove-Item -Recurse -Force (Join-Path $repoDir ".venv")
+  python -m venv (Join-Path $repoDir ".venv")
+}
+
+Write-Host "Installing dependencies..."
+& $venvPip install --upgrade pip | Out-Null
+& $venvPip install -r (Join-Path $repoDir "requirements.txt")
+if ($LASTEXITCODE -ne 0) {
+  Write-Host "Failed to install dependencies. Check requirements and network access."
+  Read-Host "Press Enter to exit"
+  exit 1
 }
 
 Push-Location $repoDir
@@ -25,7 +45,7 @@ $env:PORT = "$port"
 $env:OLLAMA_URL = $ollamaUrl
 $env:OLLAMA_MODEL = $ollamaModel
 
-$python = Join-Path $repoDir ".venv\Scripts\python.exe"
+$python = $venvPython
 $backend = Start-Process -FilePath $python -ArgumentList "app.py" -PassThru
 
 Start-Sleep -Seconds 2
