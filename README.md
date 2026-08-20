@@ -25,6 +25,26 @@ $env:OLLAMA_MODEL = "qwen2.5:7b"
 $env:HOST = "0.0.0.0"
 $env:PORT = "7860"
 python app.py
+
+## One-click startup (Windows)
+
+From this repository:
+
+```powershell
+cd C:\Users\thoma\OneDrive\Desktop\Uncensored\Genesis-Project
+install-desktop-shortcut.bat
+```
+
+Then double-click `Genesis Chat.bat` or `Genesis Chat.lnk` on your Desktop to launch everything.
+
+The launcher sets:
+- `HOST=0.0.0.0`
+- `PORT=7860`
+- `OLLAMA_URL=http://127.0.0.1:11434`
+- `OLLAMA_MODEL=qwen2.5:7b`
+
+After launching, open on phone:
+`http://<PC_LOCAL_IP>:7860`
 ```
 
 ### Open from your phone
