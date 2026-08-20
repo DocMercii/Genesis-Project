@@ -33,6 +33,14 @@ function persistEndpoint() {
 }
 
 function hydrateEndpoint() {
+  const params = new URLSearchParams(window.location.search);
+  const queryBackend = params.get("backend");
+  if (queryBackend) {
+    endpointInput.value = queryBackend;
+    persistEndpoint();
+    return;
+  }
+
   const saved = localStorage.getItem("genesis_backend");
   if (saved) endpointInput.value = saved;
 }

@@ -25,6 +25,7 @@ $env:OLLAMA_MODEL = "qwen2.5:7b"
 $env:HOST = "0.0.0.0"
 $env:PORT = "7860"
 python app.py
+```
 
 ## One-click startup (Windows)
 
@@ -62,6 +63,29 @@ A GitHub Pages-ready frontend is included in `docs/`.
    - Public tunnel (HTTPS): `https://<your-tunnel-domain>/api/chat`
 
 If the page cannot reach an `http://` local endpoint, use HTTPS tunnel URL as noted.
+
+## Public URL one-click tester
+
+From repo root:
+
+```powershell
+cd C:\Users\thoma\OneDrive\Desktop\Uncensored\Genesis-Project
+launch-public-url.bat
+```
+
+This launches:
+- The local backend at port 7860
+- A public tunnel (Cloudflare Tunnel if installed, else LocalTunnel)
+
+How to use:
+1. Keep the window open.
+2. Copy the public HTTPS URL printed by the tunnel.
+3. Open:
+   - `https://docmercii.github.io/Genesis-Project/?backend=<PUBLIC_URL>/api/chat`
+4. Chat directly from your phone.
+
+Examples:
+- `https://docmercii.github.io/Genesis-Project/?backend=https://xxxx.loca.lt/api/chat`
 ```
 
 ### Open from your phone
