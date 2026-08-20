@@ -45,6 +45,23 @@ The launcher sets:
 
 After launching, open on phone:
 `http://<PC_LOCAL_IP>:7860`
+
+## Public GitHub Pages frontend
+
+A GitHub Pages-ready frontend is included in `docs/`.
+
+1. In GitHub repository settings, open **Pages**.
+2. Set source to:
+   - **Deploy from a branch**
+   - Branch: `main`
+   - Folder: `/docs`
+3. Visit your GitHub Pages URL:
+   - `https://docmercii.github.io/Genesis-Project/` (public URL)
+4. In the page, set backend URL to your current machine endpoint:
+   - Local network: `http://<PC_LOCAL_IP>:7860/api/chat`
+   - Public tunnel (HTTPS): `https://<your-tunnel-domain>/api/chat`
+
+If the page cannot reach an `http://` local endpoint, use HTTPS tunnel URL as noted.
 ```
 
 ### Open from your phone

@@ -107,14 +107,26 @@ def ask_ollama(settings: Settings, user_message: str, history: History) -> str:
 app = Flask(__name__)
 
 
+def json_with_cors(payload, status=200):
+    response = jsonify(payload)
+    response.status_code = status
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+    return response
+
+
 @app.route("/")
 def index():
     settings = load_settings()
     return render_template("index.html", model=settings.model)
 
 
-@app.route("/api/chat", methods=["POST"])
+@app.route("/api/chat", methods=["POST", "OPTIONS"])
 def chat() -> Any:
+    if request.method == "OPTIONS":
+        return json_with_cors({}, 204)
+
     settings = load_settings()
     payload = request.get_json(silent=True) or {}
 
@@ -122,24 +134,26 @@ def chat() -> Any:
     history = payload.get("history", [])
 
     if not message:
-        return jsonify({"error": "message is required"}), 400
+        return json_with_cors({"error": "message is required"}, 400)
 
     try:
         reply = ask_ollama(settings, message, history)
     except requests.RequestException as exc:
-        return jsonify({"error": f"LLM request failed: {exc}"}), 502
+        return json_with_cors({"error": f"LLM request failed: {exc}"}, 502)
     except ValueError as exc:
-        return jsonify({"error": f"Invalid LLM response: {exc}"}), 502
+        return json_with_cors({"error": f"Invalid LLM response: {exc}"}, 502)
     except Exception as exc:
-        return jsonify({"error": f"Unexpected error: {exc}"}), 500
+        return json_with_cors({"error": f"Unexpected error: {exc}"}, 500)
 
-    return jsonify({"reply": reply or "No response."})
+    return json_with_cors({"reply": reply or "No response."})
 
 
-@app.route("/health")
+@app.route("/health", methods=["GET", "OPTIONS"])
 def health():
+    if request.method == "OPTIONS":
+        return json_with_cors({}, 204)
     settings = load_settings()
-    return jsonify({"ok": True, "model": settings.model})
+    return json_with_cors({"ok": True, "model": settings.model})
 
 
 if __name__ == "__main__":

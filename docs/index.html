@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover" />
+    <title>Genesis Chat</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="card">
+        <h1>Genesis Chat</h1>
+        <p class="muted">Public page hosted on GitHub Pages for UI only. Chat runs through your local Ollama endpoint.</p>
+
+        <label for="endpoint">Local backend URL</label>
+        <input id="endpoint" type="text" placeholder="http://192.168.1.42:7860/api/chat" />
+
+        <div id="status" class="status"></div>
+        <button id="check">Check connection</button>
+
+        <section id="chat" class="chat" aria-live="polite"></section>
+
+        <form id="chat-form" class="composer" autocomplete="off">
+          <textarea id="message" rows="3" maxlength="2000" placeholder="Type a message..."></textarea>
+          <div class="row">
+            <button id="send" type="submit">Send</button>
+            <button id="clear" type="button" class="ghost">Clear</button>
+          </div>
+        </form>
+
+        <details>
+          <summary>Important</summary>
+          <p>
+            If your browser blocks calls from https to your local http endpoint, use an HTTPS tunnel
+            (Cloudflare Tunnel / ngrok) and set the endpoint to that HTTPS URL.
+          </p>
+        </details>
+      </section>
+    </main>
+    <script src="chat.js" defer></script>
+  </body>
+</html>

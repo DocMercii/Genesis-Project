@@ -1,0 +1,20 @@
+:root { --bg:#f5f7ff; --panel:#fff; --muted:#64748b; --accent:#2563eb; --text:#0f172a; }
+* { box-sizing: border-box; }
+body { margin:0; min-height:100vh; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--text); background:radial-gradient(circle at 15% 0, #e0e7ff, #ecfeff); }
+.container{max-width:900px; margin:0 auto; padding:16px;}
+.card{display:flex; flex-direction:column; gap:10px; background:var(--panel); border:1px solid #dbeafe; border-radius:14px; padding:14px;}
+h1{margin:0; font-size:1.45rem;}
+.muted{margin:4px 0 6px; color:var(--muted);}
+label{font-weight:600;}
+input{padding:10px; border-radius:10px; border:1px solid #cbd5e1; width:100%;}
+.status{min-height:22px; color:var(--muted);}
+.chat{min-height:52vh; border:1px solid #dbeafe; border-radius:12px; padding:10px; background:#f8fbff; display:flex; flex-direction:column; gap:8px; overflow:auto;}
+.bubble{max-width:85%; padding:10px 12px; border-radius:12px; white-space:pre-wrap;}
+.you{align-self:flex-end; background:#bfdbfe;}
+.bot{align-self:flex-start; background:#e2e8f0;}
+.composer{display:grid; gap:10px; margin-top:6px;}
+textarea{resize:none; width:100%; border-radius:10px; border:1px solid #cbd5e1; padding:10px; min-height:90px; font-size:16px;}
+.row{display:flex; gap:8px;}
+button{border:none; background:var(--accent); color:white; border-radius:10px; padding:10px 14px;}
+.ghost{background:#64748b;}
+details{color:var(--muted); font-size:0.95rem;}
