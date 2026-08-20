@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Genesis Chat</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="card">
+        <header class="header">
+          <div>
+            <h1>Genesis Chat</h1>
+            <p>Model: {{ model }}</p>
+          </div>
+          <span class="pill">Local only</span>
+        </header>
+
+        <div id="chat" class="chat" aria-live="polite"></div>
+
+        <form id="chatForm" class="composer" autocomplete="off">
+          <label for="message" class="visually-hidden">Message</label>
+          <textarea
+            id="message"
+            rows="3"
+            maxlength="2000"
+            placeholder="Ask anything..."
+          ></textarea>
+          <div class="actions">
+            <button id="send" type="submit">Send</button>
+            <button id="clear" type="button" class="ghost">Clear</button>
+          </div>
+          <div id="status" class="status"></div>
+        </form>
+      </section>
+    </main>
+
+    <script src="/static/chat.js" defer></script>
+  </body>
+</html>

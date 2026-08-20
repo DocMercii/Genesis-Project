@@ -1,29 +1,49 @@
-# Genesis Project
+# Genesis — Local Chat App
 
-A persistent browser-based god simulation beginning with two autonomous humans and an untouched world.
+This repository now runs a **local Flask chat app** backed by a local Ollama model.
 
-## Genesis v0.01
+## Prerequisites
 
-The first vertical slice focuses on making two individual humans interesting before adding civilization-scale systems.
+- Python 3.10+
+- Ollama installed and running
+- A local model downloaded (example: `ollama pull qwen2.5:7b`)
 
-- Persistent world state
-- Two autonomous original humans
-- Needs: hunger, thirst, energy, health
-- Personality traits and independent utility-based decisions
-- Perception and memories
-- Physical resources: water, trees, stone, berry bushes
-- Gathering, eating, drinking, sleeping and wandering
-- Creator observation and divine messages
-- World history/event log
-- Responsive desktop/mobile world view
-- Architecture ready for reproduction, construction, knowledge, families and settlements
+## Quick setup
 
-## Architecture
+```powershell
+cd C:\Users\thoma\OneDrive\Desktop\Uncensored\Genesis-Project
+python -m venv .venv
+.venv\Scripts\Activate
+pip install -r requirements.txt
+```
 
-- Cloudflare Worker
-- SQLite-backed Durable Object per world
-- Workers Static Assets frontend
-- Canvas-based 2D simulation view
-- TypeScript
+## Run (PC + phone)
 
-The simulation is authoritative on the server. Clients are windows into the same persistent world.
+```powershell
+$env:OLLAMA_URL = "http://127.0.0.1:11434"
+$env:OLLAMA_MODEL = "qwen2.5:7b"
+$env:HOST = "0.0.0.0"
+$env:PORT = "7860"
+python app.py
+```
+
+### Open from your phone
+
+1. Make sure phone and PC are on the same Wi‑Fi network.
+2. Open `http://<your-pc-local-ip>:7860` on your phone.
+3. Replace `<your-pc-local-ip>` with your LAN IP (example: `192.168.1.42`).
+
+## Environment variables
+
+- `OLLAMA_URL` (default `http://127.0.0.1:11434`)
+- `OLLAMA_MODEL` (default `qwen2.5:7b`)
+- `TEMPERATURE` (default `0.8`)
+- `TOP_P` (default `0.95`)
+- `MAX_CONTEXT_TURNS` (default `12`)
+- `REQUEST_TIMEOUT_S` (default `120`)
+- `SYSTEM_PROMPT` (default: concise, direct helper behavior)
+
+## API
+
+- `POST /api/chat` with JSON body: `{ "message": "...", "history": [...] }`
+- `GET /health` for quick service check.
