@@ -11,10 +11,12 @@ if errorlevel 1 (
   exit /b 1
 )
 copy "%REPO_DIR%launch-public-url.bat" "%USERPROFILE%\\OneDrive\\Desktop\\Genesis Public Chat.bat" /Y >nul
+copy "%REPO_DIR%launch-public-oneclick.bat" "%USERPROFILE%\\OneDrive\\Desktop\\Genesis Public One-Click.bat" /Y >nul
 
 echo Installed:
 echo %TARGET%
 echo.
 echo Double-click Genesis Chat.bat on your Desktop to launch the local chat server.
 echo Double-click Genesis Public Chat.bat on your Desktop for public HTTPS testing.
+echo Double-click Genesis Public One-Click.bat on your Desktop for one-click public testing.
 pause

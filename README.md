@@ -86,7 +86,13 @@ How to use:
 
 Examples:
 - `https://docmercii.github.io/Genesis-Project/?backend=https://xxxx.loca.lt/api/chat`
-```
+  
+### True one-click test
+
+1. Run `install-desktop-shortcut.bat` once (optional).
+2. Double-click `Genesis Public One-Click.bat` on Desktop.
+3. It starts the local server, starts a public HTTPS tunnel, and opens the final GitHub Pages URL automatically.
+4. Keep the window open while testing; close it to stop both backend and tunnel.
 
 ### Open from your phone
 
